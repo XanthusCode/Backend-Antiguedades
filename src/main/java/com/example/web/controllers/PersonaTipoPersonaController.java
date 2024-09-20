@@ -18,50 +18,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.domain.services.ClaseContacto.ClaseContactoService;
-import com.example.persistence.entities.ClaseContacto;
+import com.example.domain.services.PersonaTipoPersona.PersonaTipoPersonaService;
+import com.example.persistence.entities.PersonaTipoPersona;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/clase-contacto")
-public class ClaseContactoController {
+@RequestMapping("/api/tipo-personas")
+public class PersonaTipoPersonaController {
 
     @Autowired
-    private ClaseContactoService servicio;
+    private PersonaTipoPersonaService servicio;
 
     @GetMapping
-    public List<ClaseContacto> listarClaseContactos() {
+    public List<PersonaTipoPersona> listarTipos() {
         return servicio.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClaseContacto> ver(@PathVariable Long id) {
-        Optional<ClaseContacto> claseContactoOpt = servicio.findById(id);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<PersonaTipoPersona> ver(@PathVariable Long id) {
+        Optional<PersonaTipoPersona> tipoOpt = servicio.findById(id);
+        return tipoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody ClaseContacto claseContacto, BindingResult resultado) {
+    public ResponseEntity<?> crear(@Valid @RequestBody PersonaTipoPersona tipo, BindingResult resultado) {
         if (resultado.hasFieldErrors()) {
             return validar(resultado);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(claseContacto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(tipo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizar(@Valid @RequestBody ClaseContacto claseContacto, BindingResult resultado, @PathVariable Long id) {
+    public ResponseEntity<?> actualizar(@Valid @RequestBody PersonaTipoPersona tipo, BindingResult resultado, @PathVariable Long id) {
         if (resultado.hasFieldErrors()) {
             return validar(resultado);
         }
-        Optional<ClaseContacto> claseContactoOpt = servicio.update(id, claseContacto);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<PersonaTipoPersona> tipoOpt = servicio.update(id, tipo);
+        return tipoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClaseContacto> eliminar(@PathVariable Long id) {
-        Optional<ClaseContacto> claseContactoOpt = servicio.delete(id);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<PersonaTipoPersona> eliminar(@PathVariable Long id) {
+        Optional<PersonaTipoPersona> tipoOpt = servicio.delete(id);
+        return tipoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     private ResponseEntity<?> validar(BindingResult resultado) {

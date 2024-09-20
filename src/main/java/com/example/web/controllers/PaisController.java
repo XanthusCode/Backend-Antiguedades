@@ -18,50 +18,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.domain.services.ClaseContacto.ClaseContactoService;
-import com.example.persistence.entities.ClaseContacto;
+import com.example.domain.services.Pais.PaisService;
+import com.example.persistence.entities.Pais;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/clase-contacto")
-public class ClaseContactoController {
+@RequestMapping("/api/paises")
+public class PaisController {
 
     @Autowired
-    private ClaseContactoService servicio;
+    private PaisService servicio;
 
     @GetMapping
-    public List<ClaseContacto> listarClaseContactos() {
+    public List<Pais> listarPaises() {
         return servicio.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClaseContacto> ver(@PathVariable Long id) {
-        Optional<ClaseContacto> claseContactoOpt = servicio.findById(id);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Pais> ver(@PathVariable Long id) {
+        Optional<Pais> paisOpt = servicio.findById(id);
+        return paisOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody ClaseContacto claseContacto, BindingResult resultado) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Pais pais, BindingResult resultado) {
         if (resultado.hasFieldErrors()) {
             return validar(resultado);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(claseContacto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(pais));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizar(@Valid @RequestBody ClaseContacto claseContacto, BindingResult resultado, @PathVariable Long id) {
+    public ResponseEntity<?> actualizar(@Valid @RequestBody Pais pais, BindingResult resultado, @PathVariable Long id) {
         if (resultado.hasFieldErrors()) {
             return validar(resultado);
         }
-        Optional<ClaseContacto> claseContactoOpt = servicio.update(id, claseContacto);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Pais> paisOpt = servicio.update(id, pais);
+        return paisOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClaseContacto> eliminar(@PathVariable Long id) {
-        Optional<ClaseContacto> claseContactoOpt = servicio.delete(id);
-        return claseContactoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Pais> eliminar(@PathVariable Long id) {
+        Optional<Pais> paisOpt = servicio.delete(id);
+        return paisOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     private ResponseEntity<?> validar(BindingResult resultado) {

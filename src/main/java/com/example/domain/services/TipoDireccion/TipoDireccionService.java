@@ -1,9 +1,10 @@
 package com.example.domain.services.TipoDireccion;
 
 
-import com.example.persistence.entities.TipoDireccion;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.persistence.entities.TipoDireccion;
 
 public interface TipoDireccionService {
     List<TipoDireccion> findAll();

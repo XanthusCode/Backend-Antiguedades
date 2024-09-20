@@ -2,8 +2,6 @@ package com.example.domain.dto;
 
 
 
-import com.example.persistence.entities.TipoPersona;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +15,4 @@ public class RegisterRequest {
     Long id;
     String username;
     String password;
-    TipoPersona role;
 }

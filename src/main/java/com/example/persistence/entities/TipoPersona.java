@@ -17,6 +17,7 @@ public class TipoPersona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nombre;
 
     @OneToMany(mappedBy = "tipoPersona")
     private List<Persona> personas;
@@ -28,19 +29,26 @@ public class TipoPersona {
     public TipoPersona() {
     }
 
-    // Constructor con parámetros
-    public TipoPersona(List<Persona> personas, List<PersonaTipoPersona> personaTipoPersonas) {
+    public TipoPersona(String nombre, List<Persona> personas, List<PersonaTipoPersona> personaTipoPersonas) {
+        this.nombre = nombre;
         this.personas = personas;
         this.personaTipoPersonas = personaTipoPersonas;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<Persona> getPersonas() {
@@ -58,4 +66,7 @@ public class TipoPersona {
     public void setPersonaTipoPersonas(List<PersonaTipoPersona> personaTipoPersonas) {
         this.personaTipoPersonas = personaTipoPersonas;
     }
+
+
+   
 }
