@@ -3,7 +3,6 @@ package com.example.domain.services.ClaseContacto;
 
 import com.example.persistence.entities.ClaseContacto;
 import com.example.domain.repository.ClaseContactoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,7 @@ public class ClaseContactoImpl implements ClaseContactoService {
 
     private final ClaseContactoRepository repository;
 
-    @Autowired
+
     public ClaseContactoImpl(ClaseContactoRepository repository) {
         this.repository = repository;
     }

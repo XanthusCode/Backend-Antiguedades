@@ -6,13 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
-// Clase de entidad
 @Entity
 @Table(name = "personasTiposPersona")
 public class PersonaTipoPersona {
 
-    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,7 @@ public class PersonaTipoPersona {
     @ManyToOne
     private Persona persona;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING) 
     private TipoPersona tipoPersona;
 
     // Constructor por defecto
@@ -58,3 +58,4 @@ public class PersonaTipoPersona {
         this.tipoPersona = tipoPersona;
     }
 }
+

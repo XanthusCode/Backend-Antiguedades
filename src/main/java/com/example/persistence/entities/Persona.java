@@ -1,20 +1,12 @@
 package com.example.persistence.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.util.List;
 
-// Clase de entidad
 @Entity
 @Table(name = "personas")
 public class Persona {
 
-    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +17,7 @@ public class Persona {
     @OneToMany(mappedBy = "persona")
     private List<ContactoPersona> contactos;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
 
     @OneToMany(mappedBy = "persona")
